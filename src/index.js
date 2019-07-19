@@ -11,5 +11,5 @@ koaConfig(app);
 const port = config.api.port;
 
 app.listen(port, () => {
-  logger.info(`Server is listening on port ${port}`);
+  logger.info(`Server is listening on port with number ${port}`);
 });
