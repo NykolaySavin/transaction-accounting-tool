@@ -4,7 +4,7 @@ const env = process.env;
 module.exports = {
   mode: env.NODE_ENV,
   api: {
-    port: env.API_PORT
+    port: env.PORT
   },
   logLevel: env.LOG_LEVEL,
   db: {

@@ -8,7 +8,7 @@ initLogger();
 const app = new Koa();
 koaConfig(app);
 
-const port = config.api.port;
+const port = config.api.port||5000;
 
 app.listen(port, () => {
   logger.info(`Server is listening on port with number ${port}`);
