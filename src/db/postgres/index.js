@@ -15,8 +15,10 @@ const sequelize = new Sequelize(
     host: config.db.host,
     port: config.db.port,
     dialect: "postgres",
+      protocol:'postgres',
     logging: false,
-    dialectOptions: { ssl: true }
+    dialectOptions: { ssl: true },
+
   }
 );
 const db = {};

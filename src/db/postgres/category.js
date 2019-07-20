@@ -2,10 +2,10 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define(
-    "Category",
+    "category",
     {
       id: {
-        type: DataTypes.INTEGER(11),
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true
@@ -19,7 +19,7 @@ export default function(sequelize, DataTypes) {
         allowNull: false
       },
       percent: {
-        type: DataTypes.INTEGER(3),
+        type: DataTypes.INTEGER,
         allowNull: false
       }
     },

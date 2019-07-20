@@ -7,7 +7,7 @@
   "license": "ISC",
   "scripts": {
     "dev-start": "nodemon --exec babel-node ./src/index.js",
-    "start": "babel-node ./src/index.js",
+    "start": "NODE_ENV=production babel-node ./src/index.js",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "prettier": "npx prettier --write \"**/*.js\""
   },

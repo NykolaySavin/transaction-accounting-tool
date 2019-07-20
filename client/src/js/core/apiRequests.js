@@ -30,3 +30,33 @@ export function apiRequest(url, options) {
       .then(text => ({ [IS_API]: true, error: text, status: response.status }));
   });
 }
+export function putApiRequest(url, body, options = { headers: {} }) {
+    return apiRequest(url, {
+        ...options,
+        method: 'PUT',
+        headers: {
+            ...options.headers,
+            ...HEADERS.JSON,
+        },
+        body: JSON.stringify(body),
+    });
+}
+export function postApiRequest(url, body, options = { headers: {} }) {
+    return apiRequest(url, {
+        ...options,
+        method: 'POST',
+        headers: {
+            ...options.headers,
+            ...HEADERS.JSON,
+        },
+        body: JSON.stringify(body),
+    });
+}
+
+export function deleteApiRequest(url, options = { headers: {} }) {
+    return apiRequest(url, {
+        ...options,
+        method: 'DELETE',
+        headers: options.headers,
+    });
+}
