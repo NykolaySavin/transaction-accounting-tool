@@ -24,9 +24,8 @@ export const handleDeletion = createAction(
 
 export const reducer = {
   [handleSubmit]: state => ({ ...state }),
-  [handleDeletion]: (state, id) => ({
-    ...state,
-    categories: { data: state.categories.data.filter(item => item.id != id) }
+  [handleDeletion]: (state) => ({
+    ...state
   }),
   [fetchCategories]: state => ({
     ...state
@@ -59,10 +58,21 @@ export function* submitCategorySaga({ payload }) {
     yield put(fetchCategoriesFail(error));
   }
 }
+export function* deleteCategorySaga({ payload }) {
+    yield call(Api.deleteCategory, payload);
+    const { response, error } = yield call(Api.fetchCategories);
+    if (response) {
+        yield put(fetchCategoriesSuccess(response));
+    } else {
+        yield put(fetchCategoriesFail(error));
+    }
+}
 export function* watchSubmitCategory() {
   yield takeEvery(handleSubmit.getType(), submitCategorySaga);
 }
-
+export function* watchDeleteCategory() {
+    yield takeEvery(handleDeletion.getType(), deleteCategorySaga);
+}
 export function* watchFetchCategories() {
   yield takeEvery(fetchCategories.getType(), fetchCategoriesSaga);
 }

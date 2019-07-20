@@ -11,7 +11,7 @@ export default class Category {
   updateСategory(data) {
     return models.category
       .findByPk(data.id)
-      .then(diagram => diagram.update({ ...data }));
+      .then(category => category.update({ ...data }));
   }
 
   addCategory(data) {
@@ -20,5 +20,10 @@ export default class Category {
       type: data.type,
       name: data.name
     });
+  }
+  deleteCategory(id) {
+    return models.category
+      .findByPk(id)
+      .then(category => category.destroy());
   }
 }

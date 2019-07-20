@@ -10,7 +10,10 @@ export async function addCategory(context) {
   const data = context.request.body;
   context.body = await category.addCategory(data).catch(handleError.bind(this));
 }
-
+export async function deleteCategory(context) {
+    const id = context.params.id;
+    context.body = await category.deleteCategory(id).catch(handleError.bind(this));
+}
 export async function updateCategory(context) {
   const data = Object.assign({}, context.request.body, {
     id: context.params.id
