@@ -19,7 +19,7 @@ export default function(sequelize, DataTypes) {
         allowNull: false
       },
       percent: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false
       }
     },
