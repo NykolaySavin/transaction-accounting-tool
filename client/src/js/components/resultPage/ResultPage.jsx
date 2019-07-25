@@ -5,8 +5,8 @@ import TextInput from "../form/input/TextInput";
 
 
 export default function ResultPage({tables}) {
-    const [additionalAdjustment,setAdditionalAdjustment]=useState('');
-    const [monthAdjustment,setMonthAdjustment]=useState('');
+    const [additionalAdjustment,setAdditionalAdjustment]=useState(0);
+    const [monthAdjustment,setMonthAdjustment]=useState(0);
     return (
         <>
             <div className="page result-page">

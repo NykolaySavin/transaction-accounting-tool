@@ -26,6 +26,7 @@ export const mapTransactionGroup = (categories, transactionGroup) => {
     .filterUnusedData(transactionGroup.data, ["id", "Category"], [])
     .map(item => {
       const result = { ...item };
+      result["Amount"]=Number.parseFloat(result['Amount']);
       if (result["Amount"]) {
         result[`Adjusted @ ${category.percent}%`] =
           (result["Amount"] * category.percent) / 100;
@@ -45,6 +46,7 @@ export const createExcelOutput = (
   monthAdjustment
 ) => {
   const workbook = XLSX.utils.book_new();
+  console.dir(resultGroups);
   resultGroups.forEach(group => {
     const worksheet = XLSX.utils.json_to_sheet(group.data);
     setWooksheetLength(worksheet, group.data);
@@ -57,8 +59,8 @@ export const createExcelOutput = (
     .filter(group => group.sign)
     .reduce((acc, cur) => acc + cur.total, 0);
   const totalDebitMinusCredit =
-    totalDebit.round(4) -
-    totalCredit.round(4) +
+      Number.parseFloat(totalDebit).round(4) -
+      Number.parseFloat(totalCredit).round(4) +
     Number.parseFloat(additionalAdjustment).round(4) +
     Number.parseFloat(monthAdjustment).round(4);
   const total = [

@@ -18,7 +18,7 @@ export default function App({fetchCategories}) {
           <Route exact path="/categories" render={() =>{fetchCategories();return( <CategoryListPage />)}} />
           <Route exact path="/category" render={() => <CategoryPage />} />
             <Route exact path="/category/:id" render={(props) => <CategoryPage />} />
-          <Route exact path="/tables" component={TablePage} />
+          <Route exact path="/tables" render={()=>{fetchCategories(); return(<TablePage/>)}} />
           <Route exact path="/result" component={ResultPage} />
         </div>
       </BrowserRouter>
