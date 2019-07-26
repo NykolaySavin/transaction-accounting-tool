@@ -26,8 +26,9 @@ export const mapTransactionGroup = (categories, transactionGroup) => {
     .filterUnusedData(transactionGroup.data, ["id", "Category"], [])
     .map(item => {
       const result = { ...item };
-      result["Amount"]=Number.parseFloat(result['Amount']);
+
       if (result["Amount"]) {
+        result["Amount"] = Number.parseFloat(result["Amount"]);
         result[`Adjusted @ ${category.percent}%`] =
           (result["Amount"] * category.percent) / 100;
       }
@@ -58,15 +59,19 @@ export const createExcelOutput = (
   const totalDebit = resultGroups
     .filter(group => group.sign)
     .reduce((acc, cur) => acc + cur.total, 0);
-  const totalDebitMinusCredit =
-      Number.parseFloat(totalDebit).round(4) -
-      Number.parseFloat(totalCredit).round(4) +
-    Number.parseFloat(additionalAdjustment).round(4) +
-    Number.parseFloat(monthAdjustment).round(4);
+  const totalDebitMinusCredit = totalDebit
+    ? Number.parseFloat(totalDebit).round(4)
+    : 0 - totalCredit
+    ? Number.parseFloat(totalCredit).round(4)
+    : 0 +
+      Number.parseFloat(additionalAdjustment).round(4) +
+      Number.parseFloat(monthAdjustment).round(4);
   const total = [
     {
-      "Total Expenses": totalDebit,
-      "Total from Credits": totalCredit,
+      "Total Expenses": totalDebit ? Number.parseFloat(totalDebit).round(4) : 0,
+      "Total from Credits": totalCredit
+        ? Number.parseFloat(totalCredit).round(4)
+        : 0,
       "Additional Adjustment": additionalAdjustment,
       "Current Month Adjustment": monthAdjustment,
       "Total Payout": totalDebitMinusCredit
