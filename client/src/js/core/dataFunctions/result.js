@@ -59,13 +59,11 @@ export const createExcelOutput = (
   const totalDebit = resultGroups
     .filter(group => group.sign)
     .reduce((acc, cur) => acc + cur.total, 0);
-  const totalDebitMinusCredit = totalDebit
-    ? Number.parseFloat(totalDebit).round(4)
-    : 0 - totalCredit
-    ? Number.parseFloat(totalCredit).round(4)
-    : 0 +
-      Number.parseFloat(additionalAdjustment).round(4) +
-      Number.parseFloat(monthAdjustment).round(4);
+  const totalDebitMinusCredit =
+    (totalDebit ? Number.parseFloat(totalDebit).round(4) : 0) -
+    (totalCredit ? Number.parseFloat(totalCredit).round(4) : 0) +
+    Number.parseFloat(additionalAdjustment).round(4) +
+    Number.parseFloat(monthAdjustment).round(4);
   const total = [
     {
       "Total Expenses": totalDebit ? Number.parseFloat(totalDebit).round(4) : 0,
